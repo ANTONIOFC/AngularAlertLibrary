@@ -5,14 +5,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    NgSimpleAlertModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, NgSimpleAlertModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

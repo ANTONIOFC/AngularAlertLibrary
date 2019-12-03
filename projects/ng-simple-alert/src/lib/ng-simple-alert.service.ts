@@ -11,8 +11,7 @@ export interface AlertMessage {
   providedIn: 'root'
 })
 export class NgSimpleAlertService {
-
-  constructor() { }
+  constructor() {}
 
   public alertMessage$ = new Subject<AlertMessage>();
 
@@ -33,6 +32,6 @@ export class NgSimpleAlertService {
   }
 
   private createAlertMessage(prefix: string, message: string, color: string): AlertMessage {
-    return {prefix, message, color};
+    return { prefix, message, color };
   }
 }

@@ -5,19 +5,18 @@ import { AlertMessage, NgSimpleAlertService } from './ng-simple-alert.service';
 @Component({
   selector: 'acf-ng-simple-alert',
   template: `
-    <div class="alert" *ngIf="(alertMessage$ | async) as alertMessage" [ngStyle]="{background: alertMessage.color}">
-        <span class="closebtn" (click)="closeAlert()">&times;</span>
-        <strong>{{ alertMessage.prefix }}!</strong> {{ alertMessage.message }}
+    <div class="alert" *ngIf="alertMessage$ | async as alertMessage" [ngStyle]="{ background: alertMessage.color }">
+      <span class="closebtn" (click)="closeAlert()">&times;</span>
+      <strong>{{ alertMessage.prefix }}!</strong> {{ alertMessage.message }}
     </div>
   `,
   styles: ['./ng-simple-alert.component.css']
 })
 export class NgSimpleAlertComponent implements OnInit {
-
   alertMessage$: Observable<AlertMessage | boolean>;
   close$ = new Subject<boolean>();
 
-  constructor(private alertService: NgSimpleAlertService) { }
+  constructor(private alertService: NgSimpleAlertService) {}
 
   ngOnInit() {
     this.alertMessage$ = merge(this.alertService.alertMessage$, this.close$);
@@ -26,5 +25,4 @@ export class NgSimpleAlertComponent implements OnInit {
   closeAlert(): void {
     this.close$.next();
   }
-
 }
