@@ -32,6 +32,6 @@ export class NgSimpleAlertService {
   }
 
   private createAlertMessage(prefix: string, message: string, color: string): AlertMessage {
-    return {prefix, message, color };
+    return {prefix, message, color};
   }
 }
