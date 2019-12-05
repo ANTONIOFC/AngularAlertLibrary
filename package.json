@@ -1,15 +1,30 @@
 {
   "name": "ng-simple-alert",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "copy:readme": "copyfiles ./README.md ./projects/ng-simple-alert",
     "build": "ng build",
+    "build:lib": "npm run copy:readme && ng build ng-simple-alert",
+    "build:demo": "ng build ng-simple-alert-showcase --base-href='https://ANTONIOFC.github.io/ng-simple-alert/'",
     "format:check": "prettier --list-different \"projects/**/*.ts\"",
     "format:write": "prettier --write \"projects/**/*.ts\"",
+    "format-package-json": "npm-run-all format-package-json:*",
+    "format-package-json:lib": "prettier --write 'projects/ng-simple-alert/package.json'",
+    "format-package-json:main": "prettier --write 'package.json'",
     "test": "ng test",
+    "test:lib": "ng test ng-simple-alert",
+    "test:lib-coverage": "ng test ng-simple-alert --code-coverage --watch=false",
+    "report-coverage:lib": "cat ./coverage/ng-simple-alert/lcov.info | codecov",
+    "publish:demo": "npx angular-cli-ghpages --dir=./dist/ng-simple-alert-showcase",
+    "publish:lib": "npx semantic-release",
+    "adjust-version": "npm-run-all adjust-version:*",
+    "adjust-version:lib": "rjp projects/ng-simple-alert/package.json version $VERSION",
+    "adjust-version:main": "rjp package.json version $VERSION",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "semantic-release": "semantic-release"
   },
   "private": true,
   "dependencies": {
@@ -31,10 +46,16 @@
     "@angular/cli": "~8.1.1",
     "@angular/compiler-cli": "~8.1.1",
     "@angular/language-service": "~8.1.1",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@commitlint/prompt": "^8.2.0",
+    "@semantic-release/exec": "^3.3.8",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "codecov": "^3.6.1",
     "codelyzer": "^5.0.0",
+    "copyfiles": "^2.1.1",
     "husky": "^3.1.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -45,8 +66,10 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "lint-staged": "^9.5.0",
     "ng-packagr": "^5.1.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
     "protractor": "~5.4.0",
+    "semantic-release": "^15.13.31",
     "ts-node": "~7.0.0",
     "tsickle": "^0.35.0",
     "tslint": "~5.15.0",
@@ -54,7 +77,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
@@ -62,5 +86,14 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ANTONIOFC/AngularAlertLibrary.git"
   }
 }

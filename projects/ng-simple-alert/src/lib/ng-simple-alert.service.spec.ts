@@ -1,12 +1,48 @@
 import { TestBed } from '@angular/core/testing';
+import { TestScheduler } from 'rxjs/testing';
 
 import { NgSimpleAlertService } from './ng-simple-alert.service';
 
 describe('NgSimpleAlertService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let sut: NgSimpleAlertService;
+  let scheduler: TestScheduler;
 
-  it('should be created', () => {
-    const service: NgSimpleAlertService = TestBed.get(NgSimpleAlertService);
-    expect(service).toBeTruthy();
+  beforeEach(() => {
+    sut = new NgSimpleAlertService();
+    scheduler = new TestScheduler((actual, expected) => {
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  it('should stream a success message', () => {
+    const message = 'Vinicius Junior - next worlds best footballer';
+    const expectedMessage = { prefix: 'Success', message, color: 'green' };
+
+    sut.createSuccessAlert(message);
+    scheduler.expectObservable(sut.alertMessage$).toBe('a', { a: expectedMessage });
+  });
+
+  it('should stream a danger message', () => {
+    const message = 'Vinicius Junior - next worlds best footballer';
+    const expectedMessage = { prefix: 'Danger', message, color: 'red' };
+
+    sut.createSuccessAlert(message);
+    scheduler.expectObservable(sut.alertMessage$).toBe('a', { a: expectedMessage });
+  });
+
+  it('should stream a warning message', () => {
+    const message = 'Vinicius Junior - next worlds best footballer';
+    const expectedMessage = { prefix: 'Warning', message, color: 'darkorange' };
+
+    sut.createSuccessAlert(message);
+    scheduler.expectObservable(sut.alertMessage$).toBe('a', { a: expectedMessage });
+  });
+
+  it('should stream a info message', () => {
+    const message = 'Vinicius Junior - next worlds best footballer';
+    const expectedMessage = { prefix: 'Info', message, color: 'dodgerblue' };
+
+    sut.createSuccessAlert(message);
+    scheduler.expectObservable(sut.alertMessage$).toBe('a', { a: expectedMessage });
   });
 });
