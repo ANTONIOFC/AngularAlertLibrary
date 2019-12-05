@@ -7,7 +7,7 @@
     "copy:readme": "copyfiles ./README.md ./projects/ng-simple-alert",
     "build": "ng build",
     "build:lib": "npm run copy:readme && ng build ng-simple-alert",
-    "build:demo": "ng build ng-simple-alert-showcase --base-href='https://ANTONIOFC.github.io/ng-simple-alert/'",
+    "build:demo": "ng build ng-simple-alert-showcase --base-href='https://ANTONIOFC.github.io/AngularAlertLibrary/'",
     "format:check": "prettier --list-different \"projects/**/*.ts\"",
     "format:write": "prettier --write \"projects/**/*.ts\"",
     "format-package-json": "npm-run-all format-package-json:*",
